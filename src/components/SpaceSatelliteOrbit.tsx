@@ -13,9 +13,9 @@ export default function SpaceSatelliteOrbit({
   const pivotRef = useRef<THREE.Group | null>(null);
 
   // config for single large satellite
-  const orbitRadius = 70; // Much larger orbit radius
-  const orbitSpeed = 0.3; // Slower orbit speed for larger radius
-  const startAngleDeg = 110; // Starting position around the orbit (degrees)
+  const orbitRadius = 85; // Much larger orbit radius
+  const orbitSpeed = 0.2; // Slower orbit speed for larger radius
+  const startAngleDeg = 130; // Starting position around the orbit (degrees)
 
   // orbit the satellite around Earth
   useFrame((_, delta) => {

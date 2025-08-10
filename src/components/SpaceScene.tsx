@@ -21,8 +21,8 @@ function CameraController() {
   // 🔧 EDIT CAMERA VIEWS HERE - Change these values to customize your views
   const views = {
     1: { position: [0, 0, 60], fov: 65, name: "Overview" },
-    2: { position: [0, 0, 80], fov: 65, name: "Satellite Cluster" },
-    3: { position: [0, 0, 120], fov: 65, name: "Earth Close-up" },
+    2: { position: [-10, -10, 80], fov: 65, name: "Satellite Cluster" },
+    3: { position: [-10, 8, 110], fov: 85, name: "Earth Close-up" },
   };
 
   // GSAP transition function
@@ -102,6 +102,7 @@ function CameraController() {
 
 export default function SpaceScene() {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
 
   // Use the transition state from CameraController instead of scroll-based animation
   useEffect(() => {
@@ -117,11 +118,146 @@ export default function SpaceScene() {
     return () => clearInterval(interval);
   }, [isAnimating]);
 
+  // Handle scroll events for paragraph progression
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        setCurrentParagraphIndex((prev) => (prev + 1) % 5);
+      }
+    };
+
+    document.addEventListener("wheel", handleWheel, { passive: true });
+    return () => document.removeEventListener("wheel", handleWheel);
+  }, []);
+
   return (
     <div
       className="canvas-container"
-      style={{ width: "100vw", height: "100vh" }}
+      style={{ width: "100vw", height: "100vh", position: "relative" }}
     >
+      {/* Text Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
+          pointerEvents: "none",
+          height: "100vh",
+        }}
+      >
+        {/* Test 1 */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+            right: "50px",
+            top: currentParagraphIndex === 0 ? "50%" : "100vh",
+            transform: "translateY(-50%)",
+            fontSize: "24px",
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            textAlign: "center",
+            padding: "20px",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            borderRadius: "10px",
+            transition: "top 0.5s ease-out",
+            opacity: currentParagraphIndex === 0 ? 1 : 0,
+          }}
+        >
+          Test 1!
+        </div>
+
+        {/* Test 2 */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+            right: "50px",
+            top: currentParagraphIndex === 1 ? "50%" : "100vh",
+            transform: "translateY(-50%)",
+            fontSize: "24px",
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            textAlign: "center",
+            padding: "20px",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            borderRadius: "10px",
+            transition: "top 0.5s ease-out",
+            opacity: currentParagraphIndex === 1 ? 1 : 0,
+          }}
+        >
+          Test 2!
+        </div>
+
+        {/* Test 3 */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+            right: "50px",
+            top: currentParagraphIndex === 2 ? "50%" : "100vh",
+            transform: "translateY(-50%)",
+            fontSize: "24px",
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            textAlign: "center",
+            padding: "20px",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            borderRadius: "10px",
+            transition: "top 0.5s ease-out",
+            opacity: currentParagraphIndex === 2 ? 1 : 0,
+          }}
+        >
+          Test 3!
+        </div>
+
+        {/* Test 4 */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+            right: "50px",
+            top: currentParagraphIndex === 3 ? "50%" : "100vh",
+            transform: "translateY(-50%)",
+            fontSize: "24px",
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            textAlign: "center",
+            padding: "20px",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            borderRadius: "10px",
+            transition: "top 0.5s ease-out",
+            opacity: currentParagraphIndex === 3 ? 1 : 0,
+          }}
+        >
+          Test 4!
+        </div>
+
+        {/* Test 5 */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+            right: "50px",
+            top: currentParagraphIndex === 4 ? "50%" : "100vh",
+            transform: "translateY(-50%)",
+            fontSize: "24px",
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            textAlign: "center",
+            padding: "20px",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            borderRadius: "10px",
+            transition: "top 0.5s ease-out",
+            opacity: currentParagraphIndex === 4 ? 1 : 0,
+          }}
+        >
+          Test 5!
+        </div>
+      </div>
+
       <Canvas camera={{ position: [0, 0, 60], fov: 65 }}>
         {/* Camera controller for GSAP animations */}
         <CameraController />

@@ -15,10 +15,10 @@ export default function SatelliteOrbit({ isAnimating }: SatelliteOrbitProps) {
   const rows = 5;
   const cols = 10;
   const verticalSpacing = 1.5;
-  const orbitRadius = 50; // increase if Earth is much larger
+  const orbitRadius = 62; // increase if Earth is much larger
   const satelliteScale = 1;
   // const orbitSpeed = 0.18;
-  const orbitSpeed = 0.88;
+  const orbitSpeed = 0.4;
 
   // cluster settings: control the horizontal spacing / big gap
   const clusterArcDeg = 40; // <-- width of each row's line (degrees). smaller -> bigger gap
