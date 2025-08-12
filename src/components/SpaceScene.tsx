@@ -68,15 +68,25 @@ function CameraController() {
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        // Count scroll events and change view every 3 scrolls
+        // First scroll triggers immediate animation, then every 3 scrolls
         setScrollCount((prev) => {
           const newCount = prev + 1;
-          if (newCount >= 3) {
-            // Change to next view
+
+          // First scroll (newCount === 1) triggers immediate animation
+          if (newCount === 1) {
             const nextView = currentView === 3 ? 1 : currentView + 1;
             goToView(nextView);
-            return 0; // Reset counter
+            return newCount; // Keep counting
           }
+
+          // Every 3 scrolls after the first one triggers animation
+          if (newCount >= 4) {
+            // 4th scroll (after 1st animation + 3 more scrolls)
+            const nextView = currentView === 3 ? 1 : currentView + 1;
+            goToView(nextView);
+            return 1; // Reset to 1 (after first animation)
+          }
+
           return newCount;
         });
       }
@@ -155,106 +165,130 @@ export default function SpaceScene() {
             right: "50px",
             top: currentParagraphIndex === 0 ? "50%" : "100vh",
             transform: "translateY(-50%)",
-            fontSize: "24px",
+            fontSize: "80px",
             color: "white",
             textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
             textAlign: "center",
-            padding: "20px",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            borderRadius: "10px",
-            transition: "top 0.5s ease-out",
+            // padding: "20px",
+            // backgroundColor: "rgba(0,0,0,0.5)",
+            // borderRadius: "10px",
+            transition: "top 2s ease-out",
             opacity: currentParagraphIndex === 0 ? 1 : 0,
           }}
         >
-          Test 1!
+          Our Missions
         </div>
 
         {/* Test 2 */}
         <div
           style={{
             position: "absolute",
-            left: "50px",
-            right: "50px",
+            left: "20%",
+            right: "80%",
             top: currentParagraphIndex === 1 ? "50%" : "100vh",
             transform: "translateY(-50%)",
-            fontSize: "24px",
+            fontSize: "72px",
             color: "white",
             textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
             textAlign: "center",
-            padding: "20px",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            borderRadius: "10px",
-            transition: "top 0.5s ease-out",
+            // padding: "20px",
+            // backgroundColor: "rgba(0,0,0,0.5)",
+            // borderRadius: "10px",
+            transition: "top 2s ease-out",
             opacity: currentParagraphIndex === 1 ? 1 : 0,
           }}
         >
-          Test 2!
+          SIRB
         </div>
 
         {/* Test 3 */}
         <div
           style={{
             position: "absolute",
-            left: "50px",
-            right: "50px",
+            left: "10%",
+            // right: "90%",
             top: currentParagraphIndex === 2 ? "50%" : "100vh",
             transform: "translateY(-50%)",
-            fontSize: "24px",
+            fontSize: "56px",
             color: "white",
-            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            width: "40%",
+            // textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
             textAlign: "center",
-            padding: "20px",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            borderRadius: "10px",
-            transition: "top 0.5s ease-out",
+            // padding: "20px",
+            // backgroundColor: "rgba(0,0,0,0.5)",
+            // borderRadius: "10px",
+            transition: "top 2s ease-out",
             opacity: currentParagraphIndex === 2 ? 1 : 0,
           }}
         >
-          Test 3!
+          Sirb is a space advertising mission
         </div>
 
         {/* Test 4 */}
         <div
           style={{
             position: "absolute",
-            left: "50px",
-            right: "50px",
+            left: "10%",
+            right: "90%",
             top: currentParagraphIndex === 3 ? "50%" : "100vh",
             transform: "translateY(-50%)",
-            fontSize: "24px",
+            fontSize: "56px",
             color: "white",
-            textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            width: "35%",
+            // textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
             textAlign: "center",
-            padding: "20px",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            borderRadius: "10px",
-            transition: "top 0.5s ease-out",
+            // padding: "20px",
+            // backgroundColor: "rgba(0,0,0,0.5)",
+            // borderRadius: "10px",
+            transition: "top 2s ease-out",
             opacity: currentParagraphIndex === 3 ? 1 : 0,
           }}
         >
-          Test 4!
+          We allow you to advertise anywhere on earth from space
         </div>
 
         {/* Test 5 */}
         <div
           style={{
             position: "absolute",
-            left: "50px",
-            right: "50px",
+            // left: "20%",
+            right: "20%",
             top: currentParagraphIndex === 4 ? "50%" : "100vh",
             transform: "translateY(-50%)",
-            fontSize: "24px",
+            fontSize: "80px",
             color: "white",
             textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
             textAlign: "center",
-            padding: "20px",
-            backgroundColor: "rgba(0,0,0,0.5)",
-            borderRadius: "10px",
-            transition: "top 0.5s ease-out",
+            // padding: "20px",
+            // backgroundColor: "rgba(0,0,0,0.5)",
+            // borderRadius: "10px",
+            transition: "top 2s ease-out",
             opacity: currentParagraphIndex === 4 ? 1 : 0,
           }}
         >
-          Test 5!
+          ROYAA
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            left: "10%",
+            right: "90%",
+            top: currentParagraphIndex === 3 ? "50%" : "100vh",
+            transform: "translateY(-50%)",
+            fontSize: "56px",
+            color: "white",
+            width: "35%",
+            // textShadow: "2px 2px 4px rgba(0,0,0,0.8)",
+            textAlign: "center",
+            // padding: "20px",
+            // backgroundColor: "rgba(0,0,0,0.5)",
+            // borderRadius: "10px",
+            transition: "top 2s ease-out",
+            opacity: currentParagraphIndex === 3 ? 1 : 0,
+          }}
+        >
+          Royaa provides global communication services using satellites
         </div>
       </div>
 
